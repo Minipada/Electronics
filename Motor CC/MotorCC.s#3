@@ -3707,7 +3707,6 @@ general purpose rectifier, 1 A</description>
 </classes>
 <parts>
 <part name="U$1" library="SparkFun-PowerIC" deviceset="L298_BRIDGE_DRIVER" device=""/>
-<part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
@@ -3728,6 +3727,7 @@ general purpose rectifier, 1 A</description>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="C2" library="resistor" deviceset="C-EU" device="C0805" value="100nF"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
+<part name="GND1" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3735,7 +3735,6 @@ general purpose rectifier, 1 A</description>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="43.18" y="53.34"/>
-<instance part="GND1" gate="1" x="25.4" y="68.58" rot="R180"/>
 <instance part="GND2" gate="1" x="60.96" y="68.58" rot="R180"/>
 <instance part="GND3" gate="1" x="60.96" y="40.64"/>
 <instance part="GND4" gate="1" x="25.4" y="40.64"/>
@@ -3756,6 +3755,7 @@ general purpose rectifier, 1 A</description>
 <instance part="GND8" gate="1" x="22.86" y="2.54"/>
 <instance part="C2" gate="G$1" x="73.66" y="40.64"/>
 <instance part="GND9" gate="1" x="73.66" y="33.02"/>
+<instance part="GND1" gate="1" x="25.4" y="71.12" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -3768,10 +3768,6 @@ general purpose rectifier, 1 A</description>
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND@10"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="GND@1"/>
-<pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND@20"/>
@@ -3805,15 +3801,10 @@ general purpose rectifier, 1 A</description>
 <pinref part="C2" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="GND"/>
 </segment>
-</net>
-<net name="VCC" class="0">
 <segment>
-<pinref part="SUPPLY2" gate="G$1" pin="VCC"/>
-<pinref part="U$1" gate="G$1" pin="VSS"/>
-<wire x1="60.96" y1="45.72" x2="73.66" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="45.72" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="C2" gate="G$1" pin="1"/>
+<pinref part="GND1" gate="1" pin="GND"/>
+<pinref part="U$1" gate="G$1" pin="GND@1"/>
+<wire x1="25.4" y1="68.58" x2="25.4" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -3894,9 +3885,22 @@ general purpose rectifier, 1 A</description>
 <net name="VSS" class="0">
 <segment>
 <pinref part="SUPPLY1" gate="G$1" pin="VSS"/>
-<wire x1="20.32" y1="43.18" x2="20.32" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="VS"/>
-<wire x1="20.32" y1="53.34" x2="25.4" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="53.34" x2="20.32" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="53.34" x2="20.32" y2="43.18" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<wire x1="73.66" y1="45.72" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="C2" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="VCC" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="VSS"/>
+<pinref part="SUPPLY2" gate="G$1" pin="VCC"/>
+<wire x1="60.96" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
