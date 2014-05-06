@@ -2,14 +2,14 @@ EAGLE AutoRouter Statistics:
 
 Job           : C:/Users/Minipada/Documents/eagle/Motor CC/MotorCC.brd
 
-Start at      : 18:11:23 (05/05/2014)
-End at        : 18:11:23 (05/05/2014)
+Start at      : 18:27:54 (05/05/2014)
+End at        : 18:27:54 (05/05/2014)
 Elapsed time  : 00:00:00
 
 Signals       :     7   RoutingGrid: 10 mil  Layers: 2
 Connections   :    19   predefined:  19 ( 6 Vias )
 
-Router memory :   205000
+Router memory :   254100
 
 Passname          :     Route Optimize1 Optimize2 Optimize3 Optimize4
 
