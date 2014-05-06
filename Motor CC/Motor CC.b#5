@@ -1325,27 +1325,6 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 </package>
 </packages>
 </library>
-<library name="SparkFun-Electromechanical">
-<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
-In this library you'll find anything that moves- switches, relays, buttons, potentiometers. Also, anything that goes on a board but isn't electrical in nature- screws, standoffs, etc.&lt;br&gt;&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is the end user's responsibility to ensure correctness and suitablity for a given componet or application. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
-&lt;br&gt;&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="VIBE-MOTOR-10MM">
-<wire x1="-1.5" y1="-4.8" x2="-1.5" y2="-7.8" width="0.127" layer="51"/>
-<wire x1="-1.5" y1="-7.8" x2="1.5" y2="-7.8" width="0.127" layer="51"/>
-<wire x1="1.5" y1="-7.8" x2="1.5" y2="-4.8" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="5.0009" width="0.127" layer="51"/>
-<pad name="+" x="-5" y="-3.9" drill="0.8" diameter="1.6764"/>
-<pad name="-" x="-6.35" y="-2.54" drill="0.8" diameter="1.6764"/>
-<text x="-6.8" y="-2" size="1.27" layer="21">-</text>
-<text x="-4.7" y="-5.3" size="1.27" layer="21">+</text>
-</package>
-</packages>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1548,8 +1527,6 @@ design rules under a new name.</description>
 <element name="D14" library="diode" package="DO41-10" value="1N4004" x="11.43" y="76.2"/>
 <element name="D24" library="diode" package="DO41-10" value="1N4004" x="26.67" y="76.2"/>
 <element name="D23" library="diode" package="DO41-10" value="1N4004" x="26.67" y="82.55"/>
-<element name="U$1" library="SparkFun-Electromechanical" package="VIBE-MOTOR-10MM" value="MOTOR10MM" x="39.37" y="38.1" rot="R180"/>
-<element name="U$2" library="SparkFun-Electromechanical" package="VIBE-MOTOR-10MM" value="MOTOR10MM" x="11.43" y="38.1" rot="R180"/>
 </elements>
 <signals>
 <signal name="VSS">
@@ -1588,37 +1565,29 @@ design rules under a new name.</description>
 <contactref element="IC1" pad="2"/>
 <contactref element="D21" pad="A"/>
 <contactref element="D11" pad="C"/>
-<contactref element="U$1" pad="+"/>
-<wire x1="31.75" y1="95.25" x2="6.35" y2="95.25" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="95.25" x2="31.75" y2="95.25" width="0" layer="19" extent="1-1"/>
 <wire x1="21.59" y1="62.23" x2="31.75" y2="95.25" width="0" layer="19" extent="1-1"/>
-<wire x1="44.37" y1="42" x2="21.59" y2="62.23" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
 <contactref element="IC1" pad="3"/>
 <contactref element="D12" pad="C"/>
 <contactref element="D22" pad="A"/>
-<contactref element="U$1" pad="-"/>
-<wire x1="31.75" y1="88.9" x2="6.35" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="45.72" y1="40.64" x2="31.75" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="22.86" y1="57.15" x2="45.72" y2="40.64" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="88.9" x2="31.75" y2="88.9" width="0" layer="19" extent="1-1"/>
+<wire x1="22.86" y1="57.15" x2="31.75" y2="88.9" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$4">
 <contactref element="IC1" pad="13"/>
 <contactref element="D13" pad="C"/>
 <contactref element="D23" pad="A"/>
-<contactref element="U$2" pad="+"/>
 <wire x1="6.35" y1="82.55" x2="31.75" y2="82.55" width="0" layer="19" extent="1-1"/>
-<wire x1="16.43" y1="42" x2="6.35" y2="82.55" width="0" layer="19" extent="1-1"/>
-<wire x1="35.56" y1="57.15" x2="16.43" y2="42" width="0" layer="19" extent="1-1"/>
+<wire x1="35.56" y1="57.15" x2="31.75" y2="82.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="IC1" pad="14"/>
 <contactref element="D24" pad="A"/>
 <contactref element="D14" pad="C"/>
-<contactref element="U$2" pad="-"/>
-<wire x1="17.78" y1="40.64" x2="31.75" y2="76.2" width="0" layer="19" extent="1-1"/>
-<wire x1="36.83" y1="62.23" x2="17.78" y2="40.64" width="0" layer="19" extent="1-1"/>
-<wire x1="6.35" y1="76.2" x2="17.78" y2="40.64" width="0" layer="19" extent="1-1"/>
+<wire x1="36.83" y1="62.23" x2="31.75" y2="76.2" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="76.2" x2="31.75" y2="76.2" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>

@@ -3776,7 +3776,7 @@ Physical dimension and wire connections for this powerful vibration motor. Motor
 </classes>
 <parts>
 <part name="IC1" library="st-microelectronics" deviceset="L298" device=""/>
-<part name="C1" library="resistor" deviceset="C-EU" device="025-030X050"/>
+<part name="C1" library="resistor" deviceset="C-EU" device="025-030X050" value="100nF"/>
 <part name="C2" library="resistor" deviceset="C-EU" device="025-030X050" value="100nF"/>
 <part name="D1" library="diode" deviceset="1N4004" device=""/>
 <part name="D2" library="diode" deviceset="1N4004" device=""/>

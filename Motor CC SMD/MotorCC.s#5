@@ -3714,7 +3714,6 @@ general purpose rectifier, 1 A</description>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="C1" library="resistor" deviceset="C-EU" device="C0805" value="100nF"/>
-<part name="C2" library="resistor" deviceset="C-EU" device="C0805"/>
 <part name="SUPPLY1" library="supply2" deviceset="VSS" device="" value="VS"/>
 <part name="SUPPLY2" library="supply2" deviceset="VCC" device="" value="VSS"/>
 <part name="D11" library="diode" deviceset="1N4004" device=""/>
@@ -3727,6 +3726,8 @@ general purpose rectifier, 1 A</description>
 <part name="D14" library="diode" deviceset="1N4004" device=""/>
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
+<part name="C2" library="resistor" deviceset="C-EU" device="C0805" value="100nF"/>
+<part name="GND9" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3741,9 +3742,8 @@ general purpose rectifier, 1 A</description>
 <instance part="GND5" gate="1" x="60.96" y="63.5" rot="R90"/>
 <instance part="GND6" gate="1" x="22.86" y="63.5" rot="R270"/>
 <instance part="C1" gate="G$1" x="22.86" y="10.16"/>
-<instance part="C2" gate="G$1" x="101.6" y="40.64"/>
 <instance part="SUPPLY1" gate="G$1" x="20.32" y="40.64"/>
-<instance part="SUPPLY2" gate="G$1" x="63.5" y="48.26"/>
+<instance part="SUPPLY2" gate="G$1" x="78.74" y="45.72" rot="R270"/>
 <instance part="D11" gate="1" x="53.34" y="15.24" rot="R180"/>
 <instance part="D21" gate="1" x="35.56" y="15.24" rot="R180"/>
 <instance part="D22" gate="1" x="35.56" y="20.32" rot="R180"/>
@@ -3754,6 +3754,8 @@ general purpose rectifier, 1 A</description>
 <instance part="D14" gate="1" x="53.34" y="30.48" rot="R180"/>
 <instance part="GND7" gate="1" x="60.96" y="25.4" rot="R90"/>
 <instance part="GND8" gate="1" x="22.86" y="2.54"/>
+<instance part="C2" gate="G$1" x="73.66" y="40.64"/>
+<instance part="GND9" gate="1" x="73.66" y="33.02"/>
 </instances>
 <busses>
 </busses>
@@ -3799,12 +3801,19 @@ general purpose rectifier, 1 A</description>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="C2" gate="G$1" pin="2"/>
+<pinref part="GND9" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="VCC" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="VSS"/>
 <pinref part="SUPPLY2" gate="G$1" pin="VCC"/>
-<wire x1="63.5" y1="45.72" x2="60.96" y2="45.72" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="VSS"/>
+<wire x1="60.96" y1="45.72" x2="73.66" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="45.72" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="C2" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$1" class="0">

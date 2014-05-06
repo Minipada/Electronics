@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -3696,21 +3696,18 @@ Based on the following sources:
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.381" drill="0.508">
+<clearance class="0" value="0.508"/>
 </class>
 </classes>
 <parts>
 <part name="U$1" library="SparkFun-PowerIC" deviceset="L298_BRIDGE_DRIVER" device=""/>
-<part name="GND2" library="supply1" deviceset="GND" device=""/>
-<part name="GND3" library="supply1" deviceset="GND" device=""/>
-<part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="C1" library="resistor" deviceset="C-EU" device="C0805" value="100nF"/>
 <part name="SUPPLY1" library="supply2" deviceset="VSS" device="" value="VS"/>
 <part name="SUPPLY2" library="supply2" deviceset="VCC" device="" value="VSS"/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="C2" library="resistor" deviceset="C-EU" device="C0805" value="100nF"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
-<part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="D11" library="diode" deviceset="GF1" device=""/>
 <part name="D12" library="diode" deviceset="GF1" device=""/>
 <part name="D13" library="diode" deviceset="GF1" device=""/>
@@ -3727,16 +3724,12 @@ Based on the following sources:
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="43.18" y="53.34"/>
-<instance part="GND2" gate="1" x="60.96" y="71.12" rot="R180"/>
-<instance part="GND3" gate="1" x="60.96" y="40.64"/>
-<instance part="GND4" gate="1" x="25.4" y="40.64"/>
 <instance part="C1" gate="G$1" x="22.86" y="-8.89"/>
 <instance part="SUPPLY1" gate="G$1" x="20.32" y="40.64"/>
 <instance part="SUPPLY2" gate="G$1" x="78.74" y="45.72" rot="R270"/>
 <instance part="GND8" gate="1" x="22.86" y="-20.32"/>
 <instance part="C2" gate="G$1" x="73.66" y="40.64"/>
 <instance part="GND9" gate="1" x="73.66" y="26.67"/>
-<instance part="GND1" gate="1" x="25.4" y="71.12" rot="R180"/>
 <instance part="D11" gate="D" x="35.56" y="30.48" rot="R180"/>
 <instance part="D12" gate="D" x="35.56" y="20.32" rot="R180"/>
 <instance part="D13" gate="D" x="35.56" y="10.16" rot="R180"/>
@@ -3751,14 +3744,6 @@ Based on the following sources:
 </busses>
 <nets>
 <net name="GND" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="GND@11"/>
-<pinref part="GND3" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="GND@10"/>
-<pinref part="GND4" gate="1" pin="GND"/>
-</segment>
 <segment>
 <wire x1="22.86" y1="-13.97" x2="22.86" y2="-17.78" width="0.1524" layer="91"/>
 <pinref part="GND8" gate="1" pin="GND"/>
@@ -3782,16 +3767,6 @@ Based on the following sources:
 <wire x1="58.42" y1="20.32" x2="62.23" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND1" gate="1" pin="GND"/>
-<pinref part="U$1" gate="G$1" pin="GND@1"/>
-<wire x1="25.4" y1="68.58" x2="25.4" y2="66.04" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND2" gate="1" pin="GND"/>
-<pinref part="U$1" gate="G$1" pin="GND@20"/>
-<wire x1="60.96" y1="68.58" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="C2" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="73.66" y1="35.56" x2="73.66" y2="29.21" width="0.1524" layer="91"/>
@@ -3810,6 +3785,7 @@ Based on the following sources:
 <wire x1="38.1" y1="30.48" x2="40.64" y2="30.48" width="0.1524" layer="91"/>
 <junction x="40.64" y="30.48"/>
 <wire x1="40.64" y1="30.48" x2="50.8" y2="30.48" width="0.1524" layer="91"/>
+<junction x="40.64" y="-12.7"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -3825,6 +3801,7 @@ Based on the following sources:
 <wire x1="38.1" y1="20.32" x2="43.18" y2="20.32" width="0.1524" layer="91"/>
 <junction x="43.18" y="20.32"/>
 <wire x1="43.18" y1="20.32" x2="50.8" y2="20.32" width="0.1524" layer="91"/>
+<junction x="43.18" y="-12.7"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -3840,6 +3817,7 @@ Based on the following sources:
 <wire x1="38.1" y1="10.16" x2="45.72" y2="10.16" width="0.1524" layer="91"/>
 <junction x="45.72" y="10.16"/>
 <wire x1="45.72" y1="10.16" x2="50.8" y2="10.16" width="0.1524" layer="91"/>
+<junction x="45.72" y="-12.7"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -3855,6 +3833,7 @@ Based on the following sources:
 <junction x="48.26" y="0"/>
 <wire x1="48.26" y1="0" x2="50.8" y2="0" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="0" x2="48.26" y2="-12.7" width="0.1524" layer="91"/>
+<junction x="48.26" y="-12.7"/>
 </segment>
 </net>
 <net name="VCC" class="0">
