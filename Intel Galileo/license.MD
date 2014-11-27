@@ -1,0 +1,1 @@
+A lib to make Motor Arduino shield work on Yocto OS
