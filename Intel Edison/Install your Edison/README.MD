@@ -14,7 +14,7 @@ Just a tutorial to install everything you could need on the Intel Edison.
 6. Paste everything from the **Yocto image** (atm it is *edison-image-rel1-maint-rel1-ww42-14.zip*)
 7. **Unplug** the USB and plug the left one
 8. Go to **Putty**, connect to your board (find the COM, 115200 baudrate)
-9. The login is **root**, there is no password
+9. Hit one or two times **Enter**. The login is **root**, there is no password
 10. Type in :
 ```shell
 reboot ota
@@ -111,6 +111,6 @@ python blink.py
 halt
 ```
 You'll see much lines, the last one will be:
-**[  OK  ] Reached target Shutdown.**
+**         Starting Halt...**
 
 Now you can unplug everything
