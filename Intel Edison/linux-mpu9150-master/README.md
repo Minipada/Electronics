@@ -1,3 +1,9 @@
+# Important note
+
+Pansenti, LLC is no longer in business and this repo is no longer actively supported. Please checkout www.richards-tech.com for the latest IMU-related software developments.
+
+RTIMULib [https://github.com/richards-tech/RTIMULib] is the latest and greatest version for embedded Linux systems.
+
 # linux-mpu9150
 
 An implementation of 9-axis data fusion on Linux using the [InvenSense MPU-9150 IMU][1]
@@ -147,7 +153,7 @@ Create a file:
 
 and add the line:
 
-        KERNEL=="i2c-[0-3]",MODE="0666"
+        KERNEL=="i2c-[0-7]",MODE="0666"
 
 
 Reboot to make sure everything is set correctly.
@@ -293,4 +299,5 @@ use. The idea is that you'll write your own program to replace <code>imu</code>.
 
 All of the functions in the Invensense SDK under the <code>eMPL</code> directory
 are available. See <code>mpu9150/mpu9150.c</code> for some examples.
+
 

@@ -13,12 +13,12 @@ TOOLDIR = $(OETMP)/sysroots/`uname -m`-linux/usr/bin
 STAGEDIR = ${OETMP}/sysroots/overo/usr
 
 # for soft-fp toolchains
-#CC = ${TOOLDIR}/armv7a-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
-#CFLAGS = -Wall -fsingle-precision-constant
+CC = ${TOOLDIR}/armv7a-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
+CFLAGS = -Wall -fsingle-precision-constant
 
 # for hard-fp toolchains
-CC = arm-linux-gnueabihf-gcc
-CFLAGS = -Wall -mfloat-abi=hard -mfpu=vfp -fsingle-precision-constant
+# CC = ${TOOLDIR}/armv7ahf-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc
+# CFLAGS = -Wall -mfloat-abi=hard -mfpu=vfp -fsingle-precision-constant
 
 
 LIBDIR = $(STAGEDIR)/lib
@@ -28,7 +28,6 @@ INCDIR = $(STAGEDIR)/include
 
 # add -DI2C_DEBUG for debugging
 DEFS = -DEMPL_TARGET_LINUX -DMPU9150 -DAK8975_SECONDARY
-#DEFS = -DEMPL_TARGET_LINUX -DMPU9250 -DAK8963_SECONDARY
 
 EMPLDIR = eMPL
 GLUEDIR = glue
