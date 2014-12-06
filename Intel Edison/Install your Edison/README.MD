@@ -39,7 +39,7 @@ You should have something like this:
 **_64 bytes from 64.233.166.139: seq=0 ttl=40 time=37.932 ms_**
 If not, you failed something man
 
-14. Next, you'll **change the repository** installed by default on the Edison to have the new ones !
+14.Next, you'll **change the repository** installed by default on the Edison to have the new ones !
 ``` shell
 vi /etc/opkg/base-feeds.conf
 ```
