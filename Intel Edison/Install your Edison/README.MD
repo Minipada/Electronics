@@ -104,3 +104,13 @@ python blink.py
 21.You can dance !
 
 ![I only came for dancing](https://38.media.tumblr.com/d7437511768f006890aa4af9d564ef13/tumblr_n46jgnVMt41savhp7o3_400.gif)
+
+22. To shutdown your Edison, don't unplug it like an uncivilized man (or woman), type :
+
+``` shell
+halt
+```
+You'll see much lines, the last one will be:
+**[  OK  ] Reached target Shutdown.**
+
+Now you can unplug everything
