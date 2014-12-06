@@ -111,6 +111,6 @@ python blink.py
 halt
 ```
 You'll see much lines, the last one will be:
-**         Starting Halt...**
+**Starting Halt...**
 
 Now you can unplug everything
