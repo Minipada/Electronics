@@ -35,16 +35,13 @@ gpio_list =     [mraa.Gpio(2),
 pwm_list = []
 gpio_list = []
 i = 0;
-
 while i < len(pwm_pin_number_list):
         pwm_list[i] = mraa.Pwm(pwm_pin_number_list[i])
         i++;
-
 i = 0;
 while i < len(gpio_pin_number_list):
         gpio_pin[i] = mraa.Gpio(gpio_pin_number_list[i])
         i++
-
 '''
 
 '''

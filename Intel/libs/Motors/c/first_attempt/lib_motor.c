@@ -27,7 +27,7 @@ typedef struct structpins
 int running = 0;
 
 
-void state_gpio(int gpio_pin, enabledpins pinout, int state);
+mraa_gpio_context state_gpio(int gpio_pin, enabledpins pinout, int state, mraa_gpio_context gpio);
 void state_pwm(int pin_number, float pin_value,enabledpins pinout);
 void enable_pwm(int pin_number, enabledpins pinout);
 void disable_pwm(int pin_number,enabledpins pinout);
@@ -38,22 +38,9 @@ void add_gpio_in_struct_pin_to_struct(int pin_number, int frequency, enabledpins
 int check_pwm_pin_value(float pin_value);
 void init_mraa_pwms_gpios_enabled(enabledpins pinout);
 void add_gpio_in_struct(int iopin, int state , enabledpins pinout);
+void add_pin_to_struct(int pin_number, int frequency, enabledpins pinout);
 
-void add_gpio_in_struct(int iopin, int state , enabledpins pinout)
-{
-  //No need to check if iopin is valid
-  //check has been done earlier
-  int i;
 
-  for (i = 0; i < GPIO_NUMBER_PIN; i++)
-  {
-    if (pinout.gpionb[i] == 0)
-    {
-      pinout.gpionb[i] = iopin;
-      pinout.gpiost[i] = state;
-    }
-  }
-}
 
 
 void in_out(int iopin, enabledpins pinout, char *inout)
@@ -132,47 +119,7 @@ int get_io_state(int gpio_pin, enabledpins pinout)
   }
 }
 
-void state_gpio(int gpio_pin, enabledpins pinout, int state)
-{
-  // Check si l'état est bien de 0 ou 1
-  if ((state != 1) && (state != 0))
-  {
-    fprintf(stderr, "Please use 0 or 1 as state for %d\n",
-      gpio_pin);
-    exit(1);
-  }
 
-  //Check si le pin du gpio est correct
-  if ((gpio_pin != 2) && (gpio_pin != 4) && 
-    (gpio_pin != 7) && (gpio_pin != 8) && 
-    (gpio_pin != 12) && (gpio_pin != 13))
-  {
-    fprintf(stderr, "%d is not a good value for a gpio. Please use 2,4,7,8,12 or 13\n",gpio_pin);
-    exit(1);     
-  }
-  
-  mraa_gpio_context gpio;
-  gpio = mraa_gpio_init(gpio_pin);
-
-  mraa_result_t r = MRAA_SUCCESS;
-  r = mraa_gpio_dir(gpio, get_io_state(gpio_pin,pinout));
-
-
-  r = mraa_gpio_write(gpio, state);
-  if (r != MRAA_SUCCESS) {
-    mraa_result_print(r);
-  } 
-  else {
-    if (state == 0)
-    {
-      printf("%d off\n",state);
-    }
-    else
-    {
-      printf("%d on\n", state);
-    }
-  }
-}
 
 int check_good_pin(int pin_number)
 {
@@ -191,56 +138,36 @@ int check_if_enabled(int pin_number, enabledpins pinout, char* pin_type)
 {
   int i;
   
-  if (strcmp(pin_type, "gpio") == 0)
+  if (strcmp(pin_type, "pwm") == 0)
   {
     for (i = 0; i < PWM_NUMBER_PIN; i++)
     {
       if (pinout.pwmnb[i] == pin_number)
       {
-        fprintf(stderr, "pin %d has already been initialized.\n", 
-          pin_number);
+
+        //fprintf(stderr, "pin %d has already been initialized.\n", pin_number);
         return 1;
       }
       if (pinout.pwmnb[i] == 0)
       {
-        fprintf(stderr, "Pin %d not initialized yet.\n", 
-          pin_number);
+        //fprintf(stderr, "Pin %d not initialized yet.\n", pin_number);
         return 0;
       }
     }  
   }
-  else
+  if (strcmp(pin_type, "gpio") == 0)
   {
     for (i = 0; i < GPIO_NUMBER_PIN; i++)
     {
       if (pinout.gpionb[i] == pin_number)
       {
-        fprintf(stderr, "pin %d has already been initialized.\n", 
-          pin_number);
+        fprintf(stderr, "pin %d has already been initialized.\n", pin_number);
         return 1;
       }
       if (pinout.gpionb[i] == 0){
-        fprintf(stderr, "Pin %d not initialized yet.\n", 
-          pin_number);
+        fprintf(stderr, "Pin %d not initialized yet.\n", pin_number);
         return 0;
       }
-    }
-  }
-}
-
-void add_pin_to_struct(int pin_number, int frequency, enabledpins pinout)
-{
-  int i;
-
-
-  for (i = 0; i < PWM_NUMBER_PIN; i++)
-  {
-    // I don't need to check if it has already been enabled
-    // It has been done earlier
-    if (pinout.pwmnb[i] == 0)
-    {
-      pinout.pwmnb[i] = pin_number;
-      pinout.pwmfreq[i] = frequency;
     }
   }
 }
@@ -332,7 +259,7 @@ void state_pwm(int pin_number, float pin_value, enabledpins pinout)
     exit(1);
   }
 
-  fprintf(stdout, "Pin value %f is correct\n", pin_value);
+  //fprintf(stdout, "Pin value %f is correct\n", pin_value);
 
   // Check if the pwm pin has been enabled
   int check_flag = -1;
@@ -343,7 +270,7 @@ void state_pwm(int pin_number, float pin_value, enabledpins pinout)
     exit(1);
   }
 
-  fprintf(stdout, "PWM %d not enabled \n", pin_number);
+  //fprintf(stdout, "PWM %d not enabled \n", pin_number);
 
   // Access to the pwm
   mraa_pwm_context pwm = mraa_pwm_init(pin_number);;
@@ -374,6 +301,93 @@ void init_mraa_pwms_gpios_enabled(enabledpins pinout)
   }
 }
 
+void add_pin_to_struct(int pin_number, int frequency, enabledpins pinout)
+{
+  int i;
+
+  for (i = 0; i < PWM_NUMBER_PIN; i++)
+  {
+    // I don't need to check if it has already been enabled
+    // It has been done earlier
+    if (pinout.pwmnb[i] == 0)
+    {
+      pinout.pwmnb[i] = pin_number;
+      pinout.pwmfreq[i] = frequency;
+    }
+  }
+}
+
+void add_gpio_in_struct(int iopin, int state , enabledpins pinout)
+{
+  //No need to check if iopin is valid
+  //check has been done earlier
+  int i;
+
+  for (i = 0; i < GPIO_NUMBER_PIN; i++)
+  {
+    if (pinout.gpionb[i] == 0)
+    {
+      pinout.gpionb[i] = iopin;
+      pinout.gpiost[i] = state;
+    }
+  }
+}
+
+mraa_gpio_context state_gpio(int gpio_pin, enabledpins pinout, int state, mraa_gpio_context my_gpio)
+{
+  // Check si l'état est bien de 0 ou 1
+  if ((state != 1) && (state != 0))
+  {
+    fprintf(stderr, "Please use 0 or 1 as state for %d\n",
+      gpio_pin);
+    exit(1);
+  }
+
+  int check_flag;
+  mraa_result_t r = MRAA_SUCCESS;
+
+  //Check si le pin du gpio est correct
+  if ((gpio_pin != 2) && (gpio_pin != 4) && 
+    (gpio_pin != 7) && (gpio_pin != 8) && 
+    (gpio_pin != 12) && (gpio_pin != 13))
+  {
+    fprintf(stderr, "%d is not a good value for a gpio. Please use 2,4,7,8,12 or 13\n",gpio_pin);
+    exit(1);     
+  }
+  
+  check_flag = check_if_enabled(gpio_pin, pinout, "gpio");
+  printf("check_flag = %d\n",check_flag);
+
+  if (check_flag != 1){
+    mraa_gpio_context gpio;
+    gpio = mraa_gpio_init(gpio_pin);
+    add_gpio_in_struct(gpio_pin, state, pinout);
+    r = mraa_gpio_dir(gpio, get_io_state(gpio_pin,pinout));
+    //r = mraa_gpio_write(gpio, state);
+    printf("IM HERE\n");
+    return gpio;
+  }
+
+  printf("2\n");
+  r = mraa_gpio_write(my_gpio, state);
+  printf("3\n");
+  return my_gpio;
+/*
+  if (r != MRAA_SUCCESS) {
+    mraa_result_print(r);
+    printf("4\n");
+  } 
+  else {
+    if (state == 0)
+    {
+      printf("%d off\n",state);
+    }
+    else
+    {
+      printf("%d on\n", state);
+    }
+  }*/
+}
 
 int main ()
 {
@@ -386,34 +400,27 @@ int main ()
   in_out(GPIO_MOTOR_2, pinout, "OUT");
   enable_pwm(PWM_MOTOR_2, pinout);
   
-  int direction = 0;
+  int direction = 1;
 
-  state_gpio(GPIO_MOTOR_2, pinout, direction);
-
+  printf("test\n");
+  mraa_gpio_context gpio;
+  gpio = state_gpio(GPIO_MOTOR_2, pinout, direction, gpio);
+  printf("test3\n");
   float speed = 0;
 
 
 
   while(running == 0)
     {
-      speed = speed + 0.1;
+      speed = speed + 0.2;
     
       if (speed >= 0.8)
       {
         speed = 0;
 
-        if (direction == 0)
-        {
-          direction = 1;
-          printf("dir = 1\n");
-        }
-        else
-        {
-          direction = 0;
-          printf("dir = 0\n");
-        }
-
-        state_gpio(GPIO_MOTOR_2, pinout, direction);
+        direction = !direction;
+        printf("dir = %d\n",direction);
+        gpio = state_gpio(GPIO_MOTOR_2, pinout, direction, gpio);
       }
     
       state_pwm(PWM_MOTOR_2, speed, pinout);
