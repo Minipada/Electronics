@@ -1,5 +1,3 @@
 To fix:
 
-* Factor the code
-* Be able to turn in 2 ways
-* Comment a bit more
+* Seems there are problems with the signal handler in python, mraa ?

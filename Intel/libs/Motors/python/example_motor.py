@@ -11,18 +11,19 @@
 
 import mraa
 import time
+import signal
+import sys
 
-
-# On Intel Galileo
+# On Intel Edison
 pwm_pin_number_list  = [3,5,6,9,10,11]
 gpio_pin_number_list = [2,4,7,8,12,13]
 
-pwm_list  =     [mraa.Pwm(3), 
-                mraa.Pwm(5), 
-                mraa.Pwm(6), 
-                mraa.Pwm(9), 
-                mraa.Pwm(10), 
-                mraa.Pwm(11)]
+pwm_list  =     [mraa.Pwm(3),
+                mraa.Pwm(5),
+                mraa.Pwm(6),
+                mraa.Pwm(9)]
+                #mraa.Pwm(10),
+                #mraa.Pwm(11)]
 
 gpio_list =     [mraa.Gpio(2),
                 mraa.Gpio(4),
@@ -31,52 +32,39 @@ gpio_list =     [mraa.Gpio(2),
                 mraa.Gpio(12),
                 mraa.Gpio(13)]
 
-''' To test
-pwm_list = []
-gpio_list = []
-i = 0;
-while i < len(pwm_pin_number_list):
-        pwm_list[i] = mraa.Pwm(pwm_pin_number_list[i])
-        i++;
-i = 0;
-while i < len(gpio_pin_number_list):
-        gpio_pin[i] = mraa.Gpio(gpio_pin_number_list[i])
-        i++
-'''
-
-'''
-On Intel Edison, you have to choose what Pwm you use. 
-So just edit the 2 arrays
-'''
-
-i = 0
 print("Gpios and PWM pins initialized")
+running = 1
 
-#Define state of PWM (enabled or disabled)
+# Define state of PWM (enabled or disabled), has to be 0 or 1
 def state_gpio(gpio_pin,state):
-        if (state == 1):
-                gpio_list[gpio_pin_number_list.index(gpio_pin)].write(state)
-                return
-        elif (state == 0):
+  if (state == 1):
     gpio_list[gpio_pin_number_list.index(gpio_pin)].write(state)
     return
-        else :
-                print("Bad state pin_value")
-                return
+  elif (state == 0):
+    gpio_list[gpio_pin_number_list.index(gpio_pin)].write(state)
+    return
+  else :
+    print("Bad state pin_value")
+    return
 
+# PWM value, has to be a float between 0 and 1
 def state_pwm(pin_number, pin_value):
-        pwm_list[pwm_pin_number_list.index(pin_number)].write(pin_value)
-        return
+  pwm_list[pwm_pin_number_list.index(pin_number)].write(pin_value)
+  return
 
+# Enable the pwm pin
 def enable_pwm(pin_number):
   pwm_list[pwm_pin_number_list.index(pin_number)].enable(True)
   return
 
+# Disable the pwm pin
 def disable_pwm(pin_number):
-        pwm_list[pwm_pin_number_list.index(pin_number)].enable(False)
-        return
+  pwm_list[pwm_pin_number_list.index(pin_number)].enable(False)
+  return
 
+# Define a gpio as an output or an input
 def in_out(pin_number, state):
+  state = state.upper()
   if (state == "OUT"):
     gpio_list[gpio_pin_number_list.index(pin_number)].dir(mraa.DIR_OUT)
     return
@@ -84,45 +72,37 @@ def in_out(pin_number, state):
     gpio_list[gpio_pin_number_list.index(pin_number)].dir(mraa.DIR_IN)
     return
 
+def signal_handler(signal, frame):
+  print('You pressed Ctrl+C!')
+  state_gpio(gpio_b, 0)
+  state_pwm(pwm_b, 0)
+  disable_pwm(pwm_b)
+  sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 #Setup
-#Output for A
-pwm_a = 3
+#Output for B
 pwm_b = 9
-gpio_a = 2
 gpio_b = 8
-slow = 0.4
+slow = 0.5
 fast = 0.8
 sleep_timer = 1
 forward = 1
 backward = 0
 
-in_out(gpio_a,"OUT")
-in_out(8,"OUT")
-enable_pwm(3)
-enable_pwm(9)
+in_out(gpio_b,"OUT")
+enable_pwm(pwm_b)
 
 while True:
-        # Forward and slow
-        state_gpio(gpio_a, forward)
-        state_pwm(pwm_a, slow)
-  print("sleep")
-        time.sleep(sleep_timer)
+  #Forward and fast
+  print("B Forward fast")
+  state_gpio(gpio_b,forward)
+  state_pwm(pwm_b,fast)
+  time.sleep(sleep_timer)
 
-        #Forward and fast
-        state_gpio(gpio_b,forward)
-        state_pwm(pwm_b,fast)
-  print("sleep")
-        time.sleep(sleep_timer)
-
-        #Backward and slow
-        state_gpio(gpio_a, backward)
-        state_pwm(pwm_a, fast)
-  print("sleep")
-        time.sleep(sleep_timer)
-
-        #Backward and slow
-        state_gpio(gpio_b,backward)
-        state_pwm(pwm_b,slow)
-  print("sleep")
+  #Backward and slow
+  print("B Backward slow")
+  state_gpio(gpio_b,backward)
+  state_pwm(pwm_b,slow)
   time.sleep(sleep_timer)
